@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.com.fiap.CP1_pt1.Cp1Pt1ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.676 s -- in br.com.fiap.CP1_pt1.Cp1Pt1ApplicationTests
