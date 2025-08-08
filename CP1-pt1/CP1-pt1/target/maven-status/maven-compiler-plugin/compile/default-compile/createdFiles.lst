@@ -1,3 +1,4 @@
+br\com\fiap\CP1_pt1\entity\Item$ItemBuilder.class
 br\com\fiap\CP1_pt1\service\ItemService.class
 br\com\fiap\CP1_pt1\dto\response\ItemResponseCreate.class
 br\com\fiap\CP1_pt1\dto\request\ItemRequestUpdate.class

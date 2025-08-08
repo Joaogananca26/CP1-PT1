@@ -1,23 +1,28 @@
 package br.com.fiap.CP1_pt1.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemRequestCreate {
 
     @NotBlank(message = "O nome do item não pode ficar em branco")
-    private String nomeitem;
+    private String nomeItem;
 
     @NotBlank(message = "O tipo do item não pode ficar em branco")
-    private String tipoitem;
+    private String tipoItem;
 
     @NotBlank(message = "A classificação do item não pode ficar em branco")
-    private String classificacaoitem;
+    private String classificacaoItem;
 
-    @NotBlank(message = "O tamanho do item não pode ficar em branco")
-    private double tamanhoitem;
+    @NotNull(message = "O tamanho do item não pode ficar em branco")
+    private double tamanhoItem;
 
-    @NotBlank(message = "O preço do item não pode ficar em branco")
+    @NotNull(message = "O preço do item não pode ficar em branco")
     private double precoItem;
 }
