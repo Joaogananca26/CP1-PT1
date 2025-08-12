@@ -8,10 +8,7 @@ import br.com.fiap.CP1_pt1.entity.Item;
 import br.com.fiap.CP1_pt1.exception.ItemNaoEncontradoException;
 import br.com.fiap.CP1_pt1.service.ItemService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +38,7 @@ public class ItemController {
             return ResponseEntity.ok(new ItemResponseCreate(item.getIdItem(),item.getNomeItem(),item.getTipoItem(),item.getClassificacaoItem(),
                     item.getTamanhoItem(),item.getPrecoItem()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ItemResponseCreate> lerItemEspecifico(@PathVariable UUID id){
        Item item = itemService.obterItemPorId(id);
