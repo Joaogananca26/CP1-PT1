@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @RestController
 @RequestMapping("/ferramentas")
 public class ItemController {
@@ -25,61 +27,84 @@ public class ItemController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ItemResponseCreate> cadastrarItem(@Valid @RequestBody ItemRequestCreate itemRequestCreate){
-       Item item = Item.builder()
+    public ResponseEntity<ItemResponseCreate> cadastrarItem(@Valid @RequestBody ItemRequestCreate itemRequestCreate) {
+        Item item = Item.builder()
                 .nomeItem(itemRequestCreate.getNomeItem())
                 .tipoItem(itemRequestCreate.getTipoItem())
                 .classificacaoItem(itemRequestCreate.getClassificacaoItem())
                 .tamanhoItem(itemRequestCreate.getTamanhoItem())
                 .precoItem(itemRequestCreate.getPrecoItem())
                 .build();
-       itemService.createItem(item);
 
-            return ResponseEntity.ok(new ItemResponseCreate(item.getIdItem(),item.getNomeItem(),item.getTipoItem(),item.getClassificacaoItem(),
-                    item.getTamanhoItem(),item.getPrecoItem()));
+        itemService.createItem(item);
+
+        ItemResponseCreate response = new ItemResponseCreate(
+                item.getIdItem(),
+                item.getNomeItem(),
+                item.getTipoItem(),
+                item.getClassificacaoItem(),
+                item.getTamanhoItem(),
+                item.getPrecoItem()
+        );
+
+        response.add(linkTo(methodOn(ItemController.class).lerItemEspecifico(item.getIdItem())).withSelfRel());
+        response.add(linkTo(methodOn(ItemController.class).lerItems()).withRel("listar-todos"));
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ItemResponseCreate> lerItemEspecifico(@PathVariable UUID id){
-       Item item = itemService.obterItemPorId(id);
-        return ResponseEntity.ok(new ItemResponseCreate(item.getIdItem(), item.getNomeItem(), item.getTipoItem(),
-                item.getClassificacaoItem(), item.getTamanhoItem(), item.getPrecoItem()));
+    public ResponseEntity<ItemResponseCreate> lerItemEspecifico(@PathVariable UUID id) {
+        Item item = itemService.obterItemPorId(id);
+
+        ItemResponseCreate response = new ItemResponseCreate(
+                item.getIdItem(),
+                item.getNomeItem(),
+                item.getTipoItem(),
+                item.getClassificacaoItem(),
+                item.getTamanhoItem(),
+                item.getPrecoItem()
+        );
+
+        response.add(linkTo(methodOn(ItemController.class).lerItemEspecifico(id)).withSelfRel());
+        response.add(linkTo(methodOn(ItemController.class).lerItems()).withRel("listar-todos"));
+        response.add(linkTo(methodOn(ItemController.class).atualizarDadosItem(id, null)).withRel("atualizar"));
+        response.add(linkTo(methodOn(ItemController.class).atualizarDadoItem(id, null)).withRel("atualizar-preco"));
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ItemResponseCreate>> lerItems(){
-       List<ItemResponseCreate> itens = itemService.listarItens();
-        try{
-            return ResponseEntity.ok(itens);
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<List<ItemResponseCreate>> lerItems() {
+        List<ItemResponseCreate> itens = itemService.listarItens();
+
+        itens.forEach(item ->
+                item.add(linkTo(methodOn(ItemController.class).lerItemEspecifico(item.getIdItem())).withSelfRel())
+        );
+
+        return ResponseEntity.ok(itens);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<ItemResponseCreate> atualizarDadosItem(@PathVariable UUID id,@Valid @RequestBody ItemRequestCreate item){
+    public ResponseEntity<ItemResponseCreate> atualizarDadosItem(@PathVariable UUID id, @Valid @RequestBody ItemRequestCreate item) {
         try {
             itemService.atualizarItem(id, item);
             return ResponseEntity.noContent().build();
         } catch (ItemNaoEncontradoException e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ItemResponseUpdate> atualizarDadoItem(@PathVariable UUID id, @RequestBody ItemRequestUpdate itemPreco){
+    public ResponseEntity<ItemResponseUpdate> atualizarDadoItem(@PathVariable UUID id, @RequestBody ItemRequestUpdate itemPreco) {
         try {
             itemService.atualizarPrecoItem(id, itemPreco);
             return ResponseEntity.noContent().build();
         } catch (ItemNaoEncontradoException e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
     }
