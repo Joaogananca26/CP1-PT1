@@ -4,7 +4,7 @@
 ### Brendon de Paula Brasil - RM559196
 ### João Ganança - RM556405
 ### Vinicius Leandro - RM554728
-### David Rapackman - RM
+### David Rapackman - RM556607
 
 
 #  Sistema de Gestão de Ferramentas - Spring Boot
