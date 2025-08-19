@@ -1,0 +1,177 @@
+type: collection.insomnia.rest/5.0
+name: CP1 PT1 Java
+meta:
+  id: wrk_d125d3da50b6413d942106a26ad434e8
+  created: 1755036719431
+  modified: 1755036719431
+  description: ""
+collection:
+  - name: PT1
+    meta:
+      id: fld_e8235713bd8a4932885b6b3c464adeb0
+      created: 1755036726935
+      modified: 1755036726935
+      sortKey: -1755036726935
+      description: ""
+    children:
+      - url: localhost:8081/ferramentas/768ac695-477b-4da1-a4ac-1998b52820ce
+        name: Listar por ID
+        meta:
+          id: req_917564ad466d4764806741ec5522c8de
+          created: 1755036728710
+          modified: 1755646421291
+          isPrivate: false
+          description: ""
+          sortKey: -1755036728711
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8081/ferramentas
+        name: Adicionar ferramenta
+        meta:
+          id: req_a582b951c1274a578132fb1eed2f3d52
+          created: 1755037235928
+          modified: 1755037318960
+          isPrivate: false
+          description: ""
+          sortKey: -1755037235928
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeItem": "chave de fenda",
+            	"tipoItem": "ferramenta",
+            	"classificacaoItem": "grande",
+            	"tamanhoItem": 1.2,
+            	"precoItem": 120
+            }
+        parameters:
+          - id: pair_5f47a1b8e8884ce9945b035e5e803ca8
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+          - id: pair_25c509b4015942ceb2877b562096e294
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "localhost:8081/ferramentas "
+        name: Listar todas as ferramentas
+        meta:
+          id: req_06c07662acd04d22ab118c752cf449ee
+          created: 1755041408406
+          modified: 1755041424079
+          isPrivate: false
+          description: ""
+          sortKey: -1755041408406
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8081/ferramentas/768ac695-477b-4da1-a4ac-1998b52820ce
+        name: Atualizar todos os dados
+        meta:
+          id: req_b981975e6920482fb5439e6087c843dc
+          created: 1755642429132
+          modified: 1755646440095
+          isPrivate: false
+          description: ""
+          sortKey: -1755036728611
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeItem": "oculos",
+            	"tipoItem": "acessorio",
+            	"classificacaoItem": "pequeno",
+            	"tamanhoItem": 1.5,
+            	"precoItem": 130
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8081/ferramentas/768ac695-477b-4da1-a4ac-1998b52820ce
+        name: Atualizar um dado
+        meta:
+          id: req_bdfd2ac53ee046db88f445a5e2ed1784
+          created: 1755642622855
+          modified: 1755646432625
+          isPrivate: false
+          description: ""
+          sortKey: -1755036728511
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"precoItem": 200
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_826486c0f1b170ce73382a8b8f9b373d549483a3
+    created: 1755036719439
+    modified: 1755036719439
+environments:
+  name: Base Environment
+  meta:
+    id: env_826486c0f1b170ce73382a8b8f9b373d549483a3
+    created: 1755036719436
+    modified: 1755036719436
+    isPrivate: false
